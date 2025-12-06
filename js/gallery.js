@@ -1,4 +1,4 @@
-"use srtict";
+"use strict";
 
 const images = [
   {
@@ -88,29 +88,30 @@ const markup = images
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", handelClick);
+// gallery.addEventListener("click", handelClick);
 
-function handelClick(event) {
-  event.preventDefault();
-  const getLink = event.target.closest("a");
-  if (!getLink) return;
-  const link = getLink.href;
-  console.log(link);
-}
+// function handelClick(event) {
+//   event.preventDefault();
+//   const getLink = event.target.closest("a");
+//   if (!getLink) return;
+//   const link = getLink.href;
+//   console.log(link);
+// }
 
-gallery.addEventListener("click", handelModal);
+gallery.addEventListener("click", handleModal);
 
-function handelModal(evetn) {
+function handleModal(event) {
   event.preventDefault();
 
   const img = event.target;
+  if (!img) return;
+  const link = img.dataset.source;
+  console.log(img);
 
   if (img.nodeName !== "IMG") return;
 
-  const largeImage = img.dataset.source;
-
   const instance = basicLightbox.create(`
-    <img class="modal" src="${largeImage}">
+    <img class="modal" src="${link}">
   `);
 
   instance.show();
